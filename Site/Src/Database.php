@@ -1,12 +1,8 @@
 <?php
-
 /**
- * 
- * TODO : � compl�ter
- * 
- * Auteur : 
- * Date : 
- * Description :
+ * Auteur : Juliardo Guideiner
+ * Date : 08.12.2020
+ * Description : Page de la classe Database
  */
 
 include "config.ini.php";
@@ -33,7 +29,6 @@ include "config.ini.php";
         } catch(exception $e){
             echo "connexion impossible";
         }
-        //$this->connector = new PDO('mysql:host=localhost;dbname=db_nickname_julleresche;charset=utf8' , 'root', 'root');
     }
 
     /**
@@ -60,24 +55,15 @@ include "config.ini.php";
         return $req;
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     private function formatData($req){
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     private function unsetData($req){
         $req->closeCursor();
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     public function getAllPrinters(){
         $query = "SELECT * FROM t_printer";
         $req = $this->queryPrepareExecute($query,null);
@@ -86,9 +72,6 @@ include "config.ini.php";
         return $result;
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     public function getSomePrinters($request){
         $query = "SELECT * FROM t_printer WHERE ";
         $req = $this->queryPrepareExecute($query,null);
@@ -97,9 +80,6 @@ include "config.ini.php";
         return $result;
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     public function getPrinterByID($id){
         $query = 'SELECT * FROM t_printer WHERE  idPrinter =' . $id;
         $req = $this->queryPrepareExecute($query,null);
