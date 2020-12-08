@@ -13,9 +13,6 @@ include "config.ini.php";
     // Variable de classe
     private $connector;
 
-    /**
-     * TODO: � compl�ter
-     */
     public function __construct(){
         $user = $GLOBALS['MM_CONFIG']['database']['username'];
         $pass = $GLOBALS['MM_CONFIG']['database']['password'];
@@ -31,17 +28,11 @@ include "config.ini.php";
         }
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     private function querySimpleExecute($query){
 
         // TODO: permet de pr�parer et d�ex�cuter une requ�te de type simple (sans where)
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     private function queryPrepareExecute($query, $binds){    
         $req = $this->connector->prepare($query);
         if(isset($binds))
@@ -62,6 +53,22 @@ include "config.ini.php";
 
     private function unsetData($req){
         $req->closeCursor();
+    }
+
+    public function getPrintersMark(){
+        $query = "SELECT * FROM t_printer LEFT OUTER JOIN t_mark ON t_printer.idMark = t_mark.idMark";
+        $req = $this->queryPrepareExecute($query,null);
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result;
+    }
+
+    public function getPrintersMaker(){
+        $query = "SELECT * FROM t_printer LEFT OUTER JOIN t_maker ON t_printer.idMaker = t_maker.idMaker";
+        $req = $this->queryPrepareExecute($query,null);
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result;
     }
 
     public function getAllPrinters(){
@@ -160,16 +167,16 @@ include "config.ini.php";
         header("location: home.php");
     }
 
-    public function getSomePrintersByMark($idMark)
+    public function getSomePrintersByMark()
     {
-        $query = 'SELECT * FROM t_printer WHERE idMark =' . $idMark;
-        $this->getSomePrinters($query);
+        $query = 'SELECT * FROM t_printer ORDER BY idMark ASC';
+        return $this->getSomePrinters($query);
     }
 
-    public function getSomePrintersByMaker($idMaker)
+    public function getSomePrintersByMaker()
     {
-        $query = 'SELECT * FROM t_printer WHERE idMaker =' . $idMaker;
-        $this->getSomePrinters($query);
+        $query = 'SELECT * FROM t_printer ORDER BY idMaker ASC';
+        return $this->getSomePrinters($query);
     }
 }
 ?>
