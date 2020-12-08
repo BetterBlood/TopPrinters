@@ -23,6 +23,21 @@
     {
       $printers = $database->getSomePrintersByMaker();
     }
+    else if ($_GET["grundschutz"] == "price")
+    {
+      if (!isset($_SESSION["ASC"]))
+      {
+        $_SESSION["ASC"] = true;
+      }
+      
+      $printers = $database->getPrintersByPrice($_SESSION["ASC"]);
+
+      $_SESSION["ASC"] = !$_SESSION["ASC"];
+    }
+    else if ($_GET["grundschutz"] == "speed")
+    {
+      $printers = $database->getPrintersBySpeed();
+    }
   }
   else
   {
@@ -199,7 +214,8 @@
                 <th><a href="">Modèle</a></th>
                 <th><a href="printersList.php?grundschutz=maker">Fabricant</a></th>
                 <th><a href="printersList.php?grundschutz=mark">Marque</a></th>
-                <th><a href="printersList.php?grundschutz=price">Prix</a></th>
+                <th><a href="printersList.php?grundschutz=price">Prix [CHF]</a></th>
+                <th><a href="printersList.php?grundschutz=speed">Vitesse d'impression [ppm]</a></th>
               </h3>
             </tr>
             <?php
@@ -227,7 +243,8 @@
                         <td>' . $printer["priModel"] . '</td>
                         <td>' . $selectedMaker["makName"] . '</td>
                         <td>' . $selectedMark["marName"] . '</td>
-                        <td>' . $printer["priWeight"] . '</td>
+                        <td>' . $printer["priPrice"] . '</td>
+                        <td>' . $printer["priPrintingSpeed"] . '</td>
                         <td><a href="details.php?idPrinter=' . $printer["idPrinter"] . '" class="fa fa-search fa-2x btn-outline-secondary"></a></td>
                       </tr>';
                 echo '<hr>';
