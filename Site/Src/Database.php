@@ -114,6 +114,13 @@ include "config.ini.php";
         $this->unsetData($req);
     }
 
+    public function getPrintersBySpeed(){
+        $query = 'SELECT * FROM t_printer ORDER BY priSpeed DESC';
+
+        $req = $this->queryPrepareExecute($query,null);
+        $this->unsetData($req);
+    }
+
     public function insertPrinter($lastName, $firstName, $gender, $nickName, $origin, $section){
         $query = "INSERT INTO t_printer (teaLastName, teaFirstName, teaGender, teaNickName, teaNicknameOrigin, idSection) VALUES (:lastname,:firstname,:gender,:nickname,:origin,:section)";
         $values = array(
