@@ -110,6 +110,24 @@ include "config.ini.php";
         header("location: home.php");
     }
 
+    public function getPrintersByPrice($expensive){
+        if($expensive = true){
+            $query = 'SELECT * FROM t_printer ORDER BY priPrice ASC';
+        } else {
+            $query = 'SELECT * FROM t_printer ORDER BY priPrice DESC';
+        }
+
+        $req = $this->queryPrepareExecute($query,null);
+        $this->unsetData($req);
+    }
+
+    public function getPrintersBySpeed(){
+        $query = 'SELECT * FROM t_printer ORDER BY priSpeed DESC';
+
+        $req = $this->queryPrepareExecute($query,null);
+        $this->unsetData($req);
+    }
+
     public function insertPrinter($lastName, $firstName, $gender, $nickName, $origin, $section){
         $query = "INSERT INTO t_printer (teaLastName, teaFirstName, teaGender, teaNickName, teaNicknameOrigin, idSection) VALUES (:lastname,:firstname,:gender,:nickname,:origin,:section)";
         $values = array(
