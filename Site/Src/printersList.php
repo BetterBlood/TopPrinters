@@ -224,7 +224,7 @@
                 }
                 echo '<tr>
                         <td>' . $printer["priModel"] . '</td>
-                        <td>' . $selectedMaker["marName"] . '</td>
+                        <td>' . $selectedMaker["makName"] . '</td>
                         <td>' . $selectedMark["marName"] . '</td>
                         <td>' . $printer["priWeight"] . '</td>
                         <td><a href="details.php?idPrinter=' . $printer["idPrinter"] . '" class="fa fa-search fa-2x btn-outline-secondary"></a></td>
