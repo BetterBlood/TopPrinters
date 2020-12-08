@@ -73,7 +73,7 @@ include "config.ini.php";
     }
 
     public function getSomePrinters($request){
-        $query = "SELECT * FROM t_printer WHERE ";
+        $query = $request;
         $req = $this->queryPrepareExecute($query,null);
         $result = $this->formatData($req);
         $this->unsetData($req);
@@ -141,5 +141,17 @@ include "config.ini.php";
         $this->unsetData($req);
         header("location: home.php");
     }
- }
+
+    public function getSomePrintersByMark($idMark)
+    {
+        $query = 'SELECT * FROM t_printer WHERE idMark =' . $idMark;
+        $this->getSomePrinters($query);
+    }
+
+    public function getSomePrintersByMaker($idMaker)
+    {
+        $query = 'SELECT * FROM t_printer WHERE idMaker =' . $idMaker;
+        $this->getSomePrinters($query);
+    }
+}
 ?>
