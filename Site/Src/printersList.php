@@ -199,7 +199,7 @@
                 <th><a href="">Modèle</a></th>
                 <th><a href="printersList.php?grundschutz=maker">Fabricant</a></th>
                 <th><a href="printersList.php?grundschutz=mark">Marque</a></th>
-                <th><a href="">Poids</a></th>
+                <th><a href="printersList.php?grundschutz=price">Prix</a></th>
               </h3>
             </tr>
             <?php
@@ -222,6 +222,7 @@
                     $selectedMark = $mark; 
                   }
                 }
+
                 echo '<tr>
                         <td>' . $printer["priModel"] . '</td>
                         <td>' . $selectedMaker["makName"] . '</td>

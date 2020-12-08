@@ -30,7 +30,6 @@ include "config.ini.php";
 
     private function querySimpleExecute($query){
 
-        // TODO: permet de pr�parer et d�ex�cuter une requ�te de type simple (sans where)
     }
 
     private function queryPrepareExecute($query, $binds){    
@@ -102,14 +101,6 @@ include "config.ini.php";
         header("location: home.php");
     }
 
-    public function modifyPrinter($id, $gender, $nickname, $origin, $section){
-        $query = 'UPDATE t_teacher SET teaGender="' . $gender . '", teaNickname="' . $nickname . '", teaNicknameOrigin="' . $origin . '", idSection=' . $section . ' WHERE idTeacher =' . $id;
-
-        $req = $this->queryPrepareExecute($query,null);
-        $this->unsetData($req);
-        header("location: home.php");
-    }
-
     public function getPrintersByPrice($expensive){
         if($expensive = true){
             $query = 'SELECT * FROM t_printer ORDER BY priPrice ASC';
@@ -126,45 +117,6 @@ include "config.ini.php";
 
         $req = $this->queryPrepareExecute($query,null);
         $this->unsetData($req);
-    }
-
-    public function insertPrinter($lastName, $firstName, $gender, $nickName, $origin, $section){
-        $query = "INSERT INTO t_printer (teaLastName, teaFirstName, teaGender, teaNickName, teaNicknameOrigin, idSection) VALUES (:lastname,:firstname,:gender,:nickname,:origin,:section)";
-        $values = array(
-            1=> array(
-                'marker' => ':lastname',
-                'var' => $lastName,
-                'type' => PDO::PARAM_STR
-            ),
-            2=> array(
-                'marker' => ':firstname',
-                'var' => $firstName,
-                'type' => PDO::PARAM_STR
-            ),
-            3=> array(
-                'marker' => ':gender',
-                'var' => $gender,
-                'type' => PDO::PARAM_STR
-            ),
-            4=> array(
-                'marker' => ':nickname',
-                'var' => $nickName,
-                'type' => PDO::PARAM_STR
-            ),
-            5=> array(
-                'marker' => ':origin',
-                'var' => $origin,
-                'type' => PDO::PARAM_STR
-            ),
-            6=> array(
-                'marker' => ':section',
-                'var' => $section,
-                'type' => PDO::PARAM_INT
-            )
-        );
-        $req = $this->queryPrepareExecute($query,$values);
-        $this->unsetData($req);
-        header("location: home.php");
     }
 
     public function getSomePrintersByMark()
