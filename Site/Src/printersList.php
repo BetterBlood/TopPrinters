@@ -11,7 +11,26 @@
 
   $database = new Database();
 
-  $printers = $database->getAllPrinters();
+
+  $printers = array();
+  if(isset($_GET["grundschutz"]))
+  {
+    if($_GET["grundschutz"] == "mark")
+    {
+      $printers = $database->getSomePrintersByMark();
+    } 
+    else if ($_GET["grundschutz"] == "maker")
+    {
+      $printers = $database->getSomePrintersByMaker();
+    }
+  }
+  else
+  {
+    $printers = $database->getAllPrinters();
+  }
+
+  $marks = $database->getPrintersMark();
+  $makers = $database->getPrintersMaker();
 
   if (isset($_POST["login"])) {
     login("printersList.php");
@@ -178,8 +197,8 @@
             <tr>
               <h3>         
                 <th><a href="">Modèle</a></th>
-                <th><a href="">Vitesse</a></th>
-                <th><a href="">Capacité</a></th>
+                <th><a href="printersList.php?grundschutz=maker">Fabricant</a></th>
+                <th><a href="printersList.php?grundschutz=mark">Marque</a></th>
                 <th><a href="">Poids</a></th>
               </h3>
             </tr>
@@ -187,10 +206,26 @@
 
               foreach($printers as $printer)
               {
+                $selectedMaker;
+                $selectedMark;
+                foreach($makers as $maker)
+                {
+                  if($maker["idMaker"] == $printer["idMaker"])
+                  {
+                    $selectedMaker = $maker; 
+                  }
+                }
+                foreach($marks as $mark)
+                {
+                  if($mark["idMark"] == $printer["idMark"])
+                  {
+                    $selectedMark = $mark; 
+                  }
+                }
                 echo '<tr>
                         <td>' . $printer["priModel"] . '</td>
-                        <td>' . $printer["priPrintingSpeed"] . '</td>
-                        <td>' . $printer["priCapacity"] . '</td>
+                        <td>' . $selectedMaker["marName"] . '</td>
+                        <td>' . $selectedMark["marName"] . '</td>
                         <td>' . $printer["priWeight"] . '</td>
                         <td><a href="details.php?idPrinter=' . $printer["idPrinter"] . '" class="fa fa-search fa-2x btn-outline-secondary"></a></td>
                       </tr>';
