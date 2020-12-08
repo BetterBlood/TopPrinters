@@ -87,7 +87,7 @@ include "config.ini.php";
     }
 
     public function getPrinterByID($id){
-        $query = 'SELECT * FROM t_printer WHERE  idPrinter =' . $id;
+        $query = 'SELECT * FROM t_printer NATURAL JOIN t_maker NATURAL JOIN t_mark WHERE idPrinter =' . $id;
         $req = $this->queryPrepareExecute($query,null);
         $result = $this->formatData($req);
         $this->unsetData($req);
