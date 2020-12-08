@@ -19,8 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `db_printer`
 --
-
--- --------------------------------------------------------
+create database db_printer;
+use db_printer;-- --------------------------------------------------------
 
 --
 -- Structure de la table `t_maker`
