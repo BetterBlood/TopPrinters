@@ -86,12 +86,41 @@ include "config.ini.php";
         return $result;
     }
 
+    /**
+     * TODO: � compl�ter
+     */
     public function getSomePrinters($request){
         $query = "SELECT * FROM t_printer WHERE ";
         $req = $this->queryPrepareExecute($query,null);
         $result = $this->formatData($req);
         $this->unsetData($req);
         return $result;
+    }
+
+    /**
+     * TODO: � compl�ter
+     */
+    public function getPrinterByID($id){
+        $query = 'SELECT * FROM t_printer WHERE  idPrinter =' . $id;
+        $req = $this->queryPrepareExecute($query,null);
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result[0];
+    }
+
+    public function deletePrinter($id){
+        $query = 'DELETE FROM t_printer WHERE idPrinter =' . $id;
+        $req = $this->queryPrepareExecute($query,null);
+        $this->unsetData($req);
+        header("location: home.php");
+    }
+
+    public function modifyPrinter($id, $gender, $nickname, $origin, $section){
+        $query = 'UPDATE t_teacher SET teaGender="' . $gender . '", teaNickname="' . $nickname . '", teaNicknameOrigin="' . $origin . '", idSection=' . $section . ' WHERE idTeacher =' . $id;
+
+        $req = $this->queryPrepareExecute($query,null);
+        $this->unsetData($req);
+        header("location: home.php");
     }
 
     public function insertPrinter($lastName, $firstName, $gender, $nickName, $origin, $section){
@@ -132,59 +161,5 @@ include "config.ini.php";
         $this->unsetData($req);
         header("location: home.php");
     }
-
-    public function insertSection($name){
-        $query = "INSERT INTO t_section (secName) VALUES (:name)";
-        $values = array(
-            1=> array(
-                'marker' => ':name',
-                'var' => $name,
-                'type' => PDO::PARAM_STR
-            )
-        );
-        $req = $this->queryPrepareExecute($query,$values);
-        $this->unsetData($req);
-        header("location: home.php");
-    }
-
-    public function deletePrinter($id){
-        $query = 'DELETE FROM t_printer WHERE idPrinter =' . $id;
-        $req = $this->queryPrepareExecute($query,null);
-        $this->unsetData($req);
-        header("location: home.php");
-    }
-
-    public function modifyPrinter($id, $gender, $nickname, $origin, $section){
-        $query = 'UPDATE t_teacher SET teaGender="' . $gender . '", teaNickname="' . $nickname . '", teaNicknameOrigin="' . $origin . '", idSection=' . $section . ' WHERE idTeacher =' . $id;
-
-        $req = $this->queryPrepareExecute($query,null);
-        $this->unsetData($req);
-        header("location: home.php");
-    }
-
-    /**
-     * TODO: � compl�ter
-     */
-    public function getOneTeacher($id){
-        $query = 'SELECT * FROM t_teacher WHERE  idTeacher =' . $id;
-        $req = $this->queryPrepareExecute($query,null);
-        $result = $this->formatData($req);
-        $this->unsetData($req);
-        return $result[0];
-    }
-
-    /**
-     * TODO: � compl�ter
-     */
-    public function getAllSections(){
-        $query = "SELECT * FROM t_section";
-        $req = $this->queryPrepareExecute($query,null);
-        $result = $this->formatData($req);
-        return $result;
-    }
-
-    // + tous les autres m�thodes dont vous aurez besoin pour la suite (insertTeacher ... etc)
  }
-
-
 ?>

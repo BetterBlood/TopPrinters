@@ -77,9 +77,9 @@
         <a class="nav-link" href="printersList.php">Liste des imprimantes <span class="sr-only"></span></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" method="post"  action="resultPage.php">
+    <form class="form-inline my-2 my-lg-0" method="post"  action="#">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchValue">
-      <button class="btn btn-outline-success my-2 my-sm-0" name="search" type="submit">Search</button>
+      <button class="btn btn-dark my-2 my-sm-0" name="search" type="submit">Search</button>
     </form>
   </div>
 </nav>
@@ -177,7 +177,7 @@
   <div class="jumbotron" style="background-color: #e3f2fd;">
     <div class="container">
       <h1 class="display-3">Imprimax vous renseigne !</h1>
-      <p>Dans cette section, sont listées toutes les imprimantes que nous proposons. Il est possible de les trier par dates, prix, capacité, etc...</p>
+      <p>Venez à la decouverte du fabuleux monde des imprimantes sur notre site dynamique et intéractif ! Il est possible de les trier par dates, prix, capacité, etc...</p>
       <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <?php
             displayLoginSection();
@@ -189,7 +189,7 @@
   <div class="container">
     <!-- Example row of columns -->
     <div class="row">
-        <img src="../Ressources/images/p1.jpg" alt="">
+      <img src="../Ressources/images/p1.jpg" alt="">       
     </div>
     <hr>
 

@@ -68,9 +68,9 @@
         <a class="nav-link" href="#">Liste des imprimantes <span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" method="post"  action="resultPage.php">
+    <form class="form-inline my-2 my-lg-0" method="post"  action="#">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="searchValue">
-      <button class="btn btn-outline-success my-2 my-sm-0" name="search" type="submit">Search</button>
+      <button class="btn btn-dark my-2 my-sm-0" name="search" type="submit">Search</button>
     </form>
   </div>
 </nav>
@@ -152,7 +152,7 @@
             </div>
             <div class="form-group">
               <label for="exampleFormControlInputLast">Password</label>
-              <input type="text" class="form-control" id="exampleFormControlInputLast" name="password">
+              <input type="password" class="form-control" id="exampleFormControlInputLast" name="password">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -189,7 +189,7 @@
   <div class="jumbotron" style="background-color: #e3f2fd;">
     <div class="container">
       <h1 class="display-3">Imprimax vous renseigne !</h1>
-      <p>Rechercher a votre guise l'imprimante qui vous correspond le mieux ! Prix, marque, qualité, capacité, tout ce que vous voulez !</p>
+      <p>Dans cette section, sont listées toutes les imprimantes que nous proposons. Il est possible de les trier par dates, prix, capacité, etc...</p>
       <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <?php
             displayLoginSection();
@@ -218,7 +218,7 @@
                     <td>' . $printer["priPrintingSpeed"] . '</td>
                     <td>' . $printer["priCapacity"] . '</td>
                     <td>' . $printer["priWeight"] . '</td>
-                    <td><a href="details.php?idPrinter=' . $printer["idPrinter"] . '" class="fa fa-camera fa-2x btn-outline-secondary"></a><a href="#" class="fa fa-frown-o fa-2x btn-outline-secondary"></a><a href="deletePrinter.php?idPrinter=' . $printer["idPrinter"] . '" class="fa fa-star fa-2x btn-outline-secondary"></a></td>
+                    <td><a href="details.php?idPrinter=' . $printer["idPrinter"] . '" class="fa fa-search fa-2x btn-outline-secondary"></a></td>
                   </tr>';
             echo '<hr>';
           }

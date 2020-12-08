@@ -22,13 +22,10 @@ function displayLoginSection()
     if(isset($_SESSION["isConnected"]))
     {
       echo '<form method="post">
-              <div class="form-group" >
-              <label for="username">Connecté en tant qu\'administrateur</label>
-              </div>
-              <button type="submit" name="logout" class="btn btn-primary">Logout</button>
+              <button type="submit" name="logout" class="btn btn-primary btn-lg">Logout</button>
             </form>
             <div class="btn-group mr-2" role="group" aria-label="First group">
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#teacher">Ajouter une imprimante</button>
+              <button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#teacher">Ajouter une imprimante</button>
             </div>';
     }
     else
