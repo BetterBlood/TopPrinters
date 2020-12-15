@@ -182,11 +182,15 @@
                     <?php
                         echo '<ul class="list-group">
                                 <li class="list-group-item"><table><td><strong>Nom du modèle : </strong></td><td>' . $details["priModel"] . '</td></table></li>
-                                <li class="list-group-item"><strong>Marque : </strong></li>
-                                <li class="list-group-item"><strong>Fabricant : </strong></li>
+                                <li class="list-group-item"><table><td><strong>Marque : </strong></td><td>' . $details["marName"] . ' </td></table></li>
+                                <li class="list-group-item"><table><td><strong>Fabricant : </strong></td><td> ' . $details["makName"] . ' </td></table></li>
                                 <li class="list-group-item"><table><td><strong>Vitesse : </strong></td><td>' . $details["priPrintingSpeed"] . '</td></table></li>
                                 <li class="list-group-item"><table><td><strong>Capacité en feuilles : </strong></td><td>' . $details["priCapacity"] . '</td></table></li>
                                 <li class="list-group-item"><table><td><strong>Poids en kg : </strong></td><td>' . $details["priWeight"] . '</td></table></li>
+                                <li class="list-group-item"><table><td><strong>Résolution : </strong></td><td>' . $details["priResolutionX"] . 'px, ' . $details["priResolutionY"] . 'px</td></table></li>
+                                <li class="list-group-item"><table><td><strong>Dimensions : </strong></td><td>' . $details["priWidth"] . 'cm, ' . $details["priLength"] . 'cm, ' . $details["priHeight"] . 'cm</td></table></li>
+                                <li class="list-group-item"><table><td><strong>Prix : </strong></td><td>' . $details["priPrice"] . ' CHF</td></table></li>
+                                <li class="list-group-item"><table><td><strong>Technology : </strong></td><td>' . $details["idTechnology"] . '</td></table></li>
                             </ul>';
                     ?>
                 </div>

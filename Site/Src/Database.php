@@ -13,9 +13,6 @@ include "config.ini.php";
     // Variable de classe
     private $connector;
 
-    /**
-     * TODO: � compl�ter
-     */
     public function __construct(){
         $user = $GLOBALS['MM_CONFIG']['database']['username'];
         $pass = $GLOBALS['MM_CONFIG']['database']['password'];
@@ -31,17 +28,10 @@ include "config.ini.php";
         }
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     private function querySimpleExecute($query){
 
-        // TODO: permet de pr�parer et d�ex�cuter une requ�te de type simple (sans where)
     }
 
-    /**
-     * TODO: � compl�ter
-     */
     private function queryPrepareExecute($query, $binds){    
         $req = $this->connector->prepare($query);
         if(isset($binds))
@@ -64,6 +54,22 @@ include "config.ini.php";
         $req->closeCursor();
     }
 
+    public function getPrintersMark(){
+        $query = "SELECT * FROM t_printer LEFT OUTER JOIN t_mark ON t_printer.idMark = t_mark.idMark";
+        $req = $this->queryPrepareExecute($query,null);
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result;
+    }
+
+    public function getPrintersMaker(){
+        $query = "SELECT * FROM t_printer LEFT OUTER JOIN t_maker ON t_printer.idMaker = t_maker.idMaker";
+        $req = $this->queryPrepareExecute($query,null);
+        $result = $this->formatData($req);
+        $this->unsetData($req);
+        return $result;
+    }
+
     public function getAllPrinters(){
         $query = "SELECT * FROM t_printer";
         $req = $this->queryPrepareExecute($query,null);
@@ -81,7 +87,7 @@ include "config.ini.php";
     }
 
     public function getPrinterByID($id){
-        $query = 'SELECT * FROM t_printer WHERE  idPrinter =' . $id;
+        $query = 'SELECT * FROM t_printer NATURAL JOIN t_maker NATURAL JOIN t_mark WHERE idPrinter =' . $id;
         $req = $this->queryPrepareExecute($query,null);
         $result = $this->formatData($req);
         $this->unsetData($req);
@@ -95,81 +101,41 @@ include "config.ini.php";
         header("location: home.php");
     }
 
-    public function modifyPrinter($id, $gender, $nickname, $origin, $section){
-        $query = 'UPDATE t_teacher SET teaGender="' . $gender . '", teaNickname="' . $nickname . '", teaNicknameOrigin="' . $origin . '", idSection=' . $section . ' WHERE idTeacher =' . $id;
-
-        $req = $this->queryPrepareExecute($query,null);
-        $this->unsetData($req);
-        header("location: home.php");
-    }
-
     public function getPrintersByPrice($expensive){
-        if($expensive = true){
+        if($expensive){
             $query = 'SELECT * FROM t_printer ORDER BY priPrice ASC';
         } else {
             $query = 'SELECT * FROM t_printer ORDER BY priPrice DESC';
         }
 
         $req = $this->queryPrepareExecute($query,null);
+        $result = $this->formatData($req);
         $this->unsetData($req);
+        return $result;
     }
 
     public function getPrintersBySpeed(){
-        $query = 'SELECT * FROM t_printer ORDER BY priSpeed DESC';
+        $query = 'SELECT * FROM t_printer ORDER BY priPrintingSpeed DESC';
 
         $req = $this->queryPrepareExecute($query,null);
+        
+        $result = $this->formatData($req);
+
         $this->unsetData($req);
+        
+        return $result;
     }
 
-    public function insertPrinter($lastName, $firstName, $gender, $nickName, $origin, $section){
-        $query = "INSERT INTO t_printer (teaLastName, teaFirstName, teaGender, teaNickName, teaNicknameOrigin, idSection) VALUES (:lastname,:firstname,:gender,:nickname,:origin,:section)";
-        $values = array(
-            1=> array(
-                'marker' => ':lastname',
-                'var' => $lastName,
-                'type' => PDO::PARAM_STR
-            ),
-            2=> array(
-                'marker' => ':firstname',
-                'var' => $firstName,
-                'type' => PDO::PARAM_STR
-            ),
-            3=> array(
-                'marker' => ':gender',
-                'var' => $gender,
-                'type' => PDO::PARAM_STR
-            ),
-            4=> array(
-                'marker' => ':nickname',
-                'var' => $nickName,
-                'type' => PDO::PARAM_STR
-            ),
-            5=> array(
-                'marker' => ':origin',
-                'var' => $origin,
-                'type' => PDO::PARAM_STR
-            ),
-            6=> array(
-                'marker' => ':section',
-                'var' => $section,
-                'type' => PDO::PARAM_INT
-            )
-        );
-        $req = $this->queryPrepareExecute($query,$values);
-        $this->unsetData($req);
-        header("location: home.php");
-    }
-
-    public function getSomePrintersByMark($idMark)
+    public function getSomePrintersByMark()
     {
-        $query = 'SELECT * FROM t_printer WHERE idMark =' . $idMark;
-        $this->getSomePrinters($query);
+        $query = 'SELECT * FROM t_printer ORDER BY idMark ASC';
+        return $this->getSomePrinters($query);
     }
 
-    public function getSomePrintersByMaker($idMaker)
+    public function getSomePrintersByMaker()
     {
-        $query = 'SELECT * FROM t_printer WHERE idMaker =' . $idMaker;
-        $this->getSomePrinters($query);
+        $query = 'SELECT * FROM t_printer ORDER BY idMaker ASC';
+        return $this->getSomePrinters($query);
     }
 }
 ?>
