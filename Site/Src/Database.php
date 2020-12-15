@@ -87,7 +87,7 @@ include "config.ini.php";
     }
 
     public function getPrinterByID($id){
-        $query = 'SELECT * FROM t_printer WHERE  idPrinter =' . $id;
+        $query = 'SELECT * FROM t_printer NATURAL JOIN t_maker NATURAL JOIN t_mark WHERE idPrinter =' . $id;
         $req = $this->queryPrepareExecute($query,null);
         $result = $this->formatData($req);
         $this->unsetData($req);
@@ -102,21 +102,28 @@ include "config.ini.php";
     }
 
     public function getPrintersByPrice($expensive){
-        if($expensive = true){
+        if($expensive){
             $query = 'SELECT * FROM t_printer ORDER BY priPrice ASC';
         } else {
             $query = 'SELECT * FROM t_printer ORDER BY priPrice DESC';
         }
 
         $req = $this->queryPrepareExecute($query,null);
+        $result = $this->formatData($req);
         $this->unsetData($req);
+        return $result;
     }
 
     public function getPrintersBySpeed(){
-        $query = 'SELECT * FROM t_printer ORDER BY priSpeed DESC';
+        $query = 'SELECT * FROM t_printer ORDER BY priPrintingSpeed DESC';
 
         $req = $this->queryPrepareExecute($query,null);
+        
+        $result = $this->formatData($req);
+
         $this->unsetData($req);
+        
+        return $result;
     }
 
     public function getSomePrintersByMark()
