@@ -11,10 +11,7 @@ function displayLoginSection()
     {
       echo '<form method="post">
               <button type="submit" name="logout" class="btn btn-primary btn-lg">Logout</button>
-            </form>
-            <div class="btn-group mr-2" role="group" aria-label="First group">
-              <button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#teacher">Ajouter une imprimante</button>
-            </div>';
+            </form>';
     }
     else
     {
